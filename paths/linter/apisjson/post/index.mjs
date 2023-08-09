@@ -5,29 +5,22 @@ import { truthy } from "@stoplight/spectral-functions";
 
 export function handler(event, context, callback) {
 
-  const myDocument = new Document(
-    `---
-  responses:
-    '200':
-      description: ''`,
-    Parsers.Yaml,
-    "/my-file",
-  );
+  const myDocument = new Document(event.body);
 
   const spectral = new Spectral();
   spectral.setRuleset({
 
-    rules: { // Begin Rules
+    rules: {
 
-      "no-empty-description": {
-        given: "$..description",
+      "apisjson-description": {
+        given: "$.description",
         message: "Description must not be empty",
         then: {
           function: truthy,
         },
       },
 
-    }, // End Rules
+    }, 
 
   });
 
