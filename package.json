@@ -12,6 +12,7 @@
     "content-type-parser": "^1.0.2",
     "js-yaml": "^4.1.0",
     "mysql": "*",
+    "mysql2": "^3.6.0",
     "pool": "*",
     "typescript": "^4.5.2",
     "vandium": "*"
