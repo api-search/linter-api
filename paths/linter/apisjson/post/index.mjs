@@ -2,7 +2,7 @@ import spectralCore from "@stoplight/spectral-core";
 const { Spectral, Document } = spectralCore;
 import Parsers from "@stoplight/spectral-parsers";
 import { truthy } from "@stoplight/spectral-functions"; 
-import { yaml } from "js-yaml";
+import yaml from 'js-yaml';
 
 export function handler(event, context, callback) {
 
