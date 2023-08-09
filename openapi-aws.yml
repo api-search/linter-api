@@ -1,0 +1,115 @@
+openapi: 3.0.1
+info:
+  title: APIs.io API
+  description: This is the public version of the APis.io API search engine, providing
+    search, submission, and engine capabilities.
+  version: V1
+servers:
+- url: https://6lmdrlqfjj.execute-api.us-east-1.amazonaws.com/staging
+paths:
+
+  /linter/apisjson:
+    post:
+      operationId: lintAPIsJSON
+      responses:
+        200:
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Linter'
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:007596076917:function:m-s-apis-io-linterapisjson-po/invocations
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: when_no_match
+        contentHandling: CONVERT_TO_TEXT
+        type: aws
+
+  /linter/openapi:
+    post:
+      operationId: updateAPIProperties
+      responses:
+        200:
+          description: 200 response
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateProperties'
+      x-amazon-apigateway-integration:
+        httpMethod: POST
+        uri: arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:007596076917:function:m-s-apis-io-linteropenapi-po/invocations
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: when_no_match
+        contentHandling: CONVERT_TO_TEXT
+        type: aws
+
+components:
+
+  requestBodies:
+
+    APIsJSON:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/APIsJSON"
+      required: true
+
+    OpenAPI:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OpenAPI"
+      required: true
+                      
+  
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: x-api-key
+      in: header
+  
+  schemas:
+
+    OpenAPI:
+      type: object
+      description: 'An JSON API object with metadata, data, and links.'
+      
+      properties:
+        meta:
+          type: string
+
+      required:
+      - meta
+    
+
+    APIsJSON:
+      type: object
+      required:
+      - name
+      
+      properties:
+      
+        name:
+          type: string
+          description: The name of the service described
+          minLength: 5
+
+    Linting:
+      type: object
+      description: 'An JSON API object with metadata, data, and links.'
+      
+      properties:
+        meta:
+          type: string
+
+      required:
+      - meta

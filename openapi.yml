@@ -1,0 +1,136 @@
+openapi: 3.0.0
+
+info:
+
+  title: 'APIs.io API'
+  description: 'This is the public version of the APis.io API search engine, providing search, submission, and engine capabilities.'
+  version: V1
+
+  contact:
+    name: Kin Lane
+    email: info@apievangelist.com
+
+servers:
+  - url: https://dqkupdnj9l.execute-api.us-east-1.amazonaws.com/staging    
+
+tags:
+
+  - name: Search
+    description: Search using the engine.
+  - name: Tags
+    description: The tags for the engine.       
+  - name: Properties
+    description: The properties for the engine.
+  - name: Maintainers
+    description: The maintainers for the engine.
+  - name: Rules
+    description: The rules for the engine.   
+  - name: Engine
+    description: The engine for search.     
+  - name: Publish
+    description: The publishing for the engine.        
+    
+paths:
+
+  /linter/apisjson:
+        
+    post:
+      summary: Submit API
+      description: 'Submit an API to be included in the index.'
+      operationId: addAPI
+      tags:
+        - Search
+      requestBody:
+        $ref: "#/components/requestBodies/APIsJSON"
+      responses:
+        "201":
+          description: 201 response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Linting"
+      security:
+        - api_key: []                
+                
+  /linter/openapi:
+
+    post:
+      summary: Submit API
+      description: 'Submit an API to be included in the index.'
+      operationId: addAPI
+      tags:
+        - Search
+      requestBody:
+        $ref: "#/components/requestBodies/OpenAPI"
+      responses:
+        "201":
+          description: 201 response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Linting"
+      security:
+        - api_key: []  
+                     
+
+components:
+
+  requestBodies:
+
+    APIsJSON:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/APIsJSON"
+      required: true
+
+    OpenAPI:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OpenAPI"
+      required: true
+                      
+  
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: x-api-key
+      in: header
+  
+  schemas:
+
+    OpenAPI:
+      type: object
+      description: 'An JSON API object with metadata, data, and links.'
+      
+      properties:
+        meta:
+          type: string
+
+      required:
+      - meta
+    
+
+    APIsJSON:
+      type: object
+      required:
+      - name
+      
+      properties:
+      
+        name:
+          type: string
+          description: The name of the service described
+          minLength: 5
+
+    Linting:
+      type: object
+      description: 'An JSON API object with metadata, data, and links.'
+      
+      properties:
+        meta:
+          type: string
+
+      required:
+      - meta
