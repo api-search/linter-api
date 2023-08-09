@@ -8,7 +8,7 @@ export function handler(event, context, callback) {
 
   const apisjson = event.body;
 
-  sql = "SELECT rule FROM rules";
+  var sql = "SELECT rule FROM rules";
   connection.query(sql, function (error, results, fields) { 
 
     results.forEach(function(rules) {
