@@ -22,18 +22,31 @@ export function handler(event, context, callback) {
     var r = results;
 
     var ro = {};
-    
+
+    var rules = '{';
+    rules += 'rules: {';
+
     r.forEach(function(rules) {
 
-      console.log(rules.rule);
+      ro = yaml.load(rules.rule); 
 
-      ro = yaml.load(rules.rule);
-    
+      var rule_name = Object.keys(ro);
+      
+      rules += '"' + rule_name + '": {';
+      rules += 'given: "' + ro.given + '",';
+      rules += 'message: "' + ro.description + '",';
+      rules += 'then: {';
+      rules += 'function: truthy,';
+      rules += '},';
+      rules += '},';    
 
     });
 
+    rules += '},';
+    rules += '}';    
+
     connection.end();
-    callback(null,ro);    
+    callback(null,rules);    
 
   });
 
