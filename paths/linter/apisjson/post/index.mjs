@@ -3,7 +3,7 @@ const { Spectral, Document } = spectralCore;
 import Parsers from "@stoplight/spectral-parsers";
 import { truthy } from "@stoplight/spectral-functions"; 
 import yaml from 'js-yaml';
-import mysql from '';
+import mysql from 'mysql';
 
 export function handler(event, context, callback) {
 
