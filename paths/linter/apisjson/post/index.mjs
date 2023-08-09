@@ -21,14 +21,19 @@ export function handler(event, context, callback) {
 
     var r = results;
 
+    var ro = {};
+    
     r.forEach(function(rules) {
 
       console.log(rules.rule);
 
+      ro = yaml.load(rules.rule);
+    
+
     });
 
     connection.end();
-    callback(null,r);    
+    callback(null,ro);    
 
   });
 
