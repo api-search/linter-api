@@ -26,9 +26,9 @@ export function handler(event, context, callback) {
     var rules = '{';
     rules += 'rules: {';
 
-    r.forEach(function(rules) {
+    r.forEach(function(row) {
 
-      ro = yaml.load(rules.rule); 
+      ro = yaml.load(row.rule); 
 
       var rule_name = Object.keys(ro);
       
