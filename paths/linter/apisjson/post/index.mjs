@@ -7,7 +7,9 @@ export function handler(event, context, callback) {
 
   console.log(event.body);
 
-  const myDocument = new Document(event.body);
+  const apisjson = JSON.parse(event.body);
+
+  console.log(apisjson);
 
   const spectral = new Spectral();
   spectral.setRuleset({
@@ -26,7 +28,7 @@ export function handler(event, context, callback) {
 
   });
 
-  spectral.run(myDocument).then(results => {
+  spectral.run(apisjson).then(results => {
     console.log("here are the results", results);
     callback(null,results);
   });
