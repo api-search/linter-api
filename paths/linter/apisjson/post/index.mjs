@@ -33,8 +33,8 @@ export function handler(event, context, callback) {
       var rule_name = Object.keys(ro);
       
       rules += '"' + rule_name + '": {';
-      rules += 'given: "' + ro.given + '",';
-      rules += 'message: "' + ro.description + '",';
+      rules += 'given: "' + ro[rule_name].given + '",';
+      rules += 'message: "' + ro[rule_name].description + '",';
       rules += 'then: {';
       rules += 'function: truthy,';
       rules += '},';
