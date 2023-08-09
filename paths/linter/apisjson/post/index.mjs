@@ -5,11 +5,7 @@ import { truthy } from "@stoplight/spectral-functions";
 
 export function handler(event, context, callback) {
 
-  console.log(event.body);
-
-  const apisjson = JSON.parse(event.body);
-
-  console.log(apisjson);
+  const apisjson = event.body;
 
   const spectral = new Spectral();
   spectral.setRuleset({
