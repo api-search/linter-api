@@ -2,31 +2,23 @@ import spectralCore from "@stoplight/spectral-core";
 const { Spectral, Document } = spectralCore;
 import Parsers from "@stoplight/spectral-parsers";
 import { truthy } from "@stoplight/spectral-functions"; 
+import { yaml } from "js-yaml";
 
 export function handler(event, context, callback) {
 
   const apisjson = event.body;
 
-  const spectral = new Spectral();
-  spectral.setRuleset({
+  sql = "SELECT rule FROM rules";
+  connection.query(sql, function (error, results, fields) { 
 
-    rules: {
+    results.forEach(function(rules) {
 
-      "apisjson-description": {
-        given: "$.description",
-        message: "Description must not be empty",
-        then: {
-          function: truthy,
-        },
-      },
+      console.log(rules.rule);
 
-    }, 
+    });
 
-  });
-
-  spectral.run(apisjson).then(results => {
-    console.log("here are the results", results);
     callback(null,results);
+
   });
 
 };
