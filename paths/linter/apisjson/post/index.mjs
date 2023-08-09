@@ -20,7 +20,6 @@ export function handler(event, context, callback) {
   connection.query(sql, function (error, results, fields) { 
 
     var r = results;
-
     var ro = {};
 
     var rules = '{';
@@ -41,9 +40,12 @@ export function handler(event, context, callback) {
       rules += '},';    
 
     });
-
+  
     rules += '},';
-    rules += '}';    
+    rules += '}';  
+    
+    const spectral = new Spectral();
+    spectral.setRuleset(rules);    
 
     connection.end();
     callback(null,rules);    
