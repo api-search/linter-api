@@ -126,8 +126,9 @@ export function handler(event, context, callback) {
             then: {
               field: "tags",
               function: truthy,
-            },
-          },   
+              },
+            },   
+          },
           "apis-json-v14-tags-one": {
             description: "One Tag for APIs.json",
             given: "$",
