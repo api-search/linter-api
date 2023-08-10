@@ -19,14 +19,13 @@ export function handler(event, context, callback) {
   var sql = "SELECT rule FROM rules";
   connection.query(sql, function (error, results, fields) { 
 
-    const rules = {
-      rules: {}
-    };
+    const r = {};
+    r.rules = {};
 
     results.forEach(function(row) {
 
-     rules.rules[row.name] = {};
-     rules.rules[row.name] = row.rule;
+     r.rules[row.name] = {};
+     r.rules[row.name] = row.rule;
 
     });
   
