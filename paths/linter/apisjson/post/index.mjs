@@ -30,8 +30,8 @@ export function handler(event, context, callback) {
     });
   
     const spectral = new Spectral();
-    console.log(rules);
-    spectral.setRuleset(rules); 
+    console.log(r);
+    spectral.setRuleset(r); 
 
     spectral.run(apisjson).then(results => {
       console.log("here are the results", results);
