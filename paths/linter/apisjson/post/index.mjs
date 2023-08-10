@@ -52,6 +52,59 @@ export function handler(event, context, callback) {
               function: truthy,
             },
           },                  
+          "apis-json-v14-image": {
+            description: "Image of APIs.json",
+            given: "$",
+            message: "It makes your API more presentable to have a logo or image representation.",
+            severity: "error",
+            then: {
+              field: "image",
+              function: truthy,
+            },
+          },    
+          "apis-json-v14-image-empty": {
+            description: "Empty Image of APIs.json",
+            given: "$.image",
+            message: "It makes your API more presentable to have a logo or image representation.",
+            severity: "error",
+            then: {
+              function: truthy,
+            },
+          },   
+          "apis-json-v14-image-url": {
+            description: "Empty Image of APIs.json",
+            given: "$.image",
+            message: "It makes your API more presentable to have a logo or image representation.",
+            severity: "error",
+            then: {
+              function: "pattern",
+              functionOptions: {
+                notMatch: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"
+              },
+            },
+          },                    
+          "apis-json-v14-tags": {
+            description: "Tags for APIs.json",
+            given: "$",
+            message: "Using the tags property for your APIs.json helps add more metadata and make your APIs discoverable.",
+            severity: "error",
+            then: {
+              field: "tags",
+              function: truthy,
+            },
+          },
+          "apis-json-v14-tags-one": {
+            description: "One Tag for APIs.json",
+            given: "$",
+            message: "Having at least one tag for your APIs.json helps ensure that it will be more discoverable.",
+            severity: "error",
+            then: {
+              function: "pattern",
+              functionOptions: {
+                min: 1
+              },
+            },
+          }, 
                               
         },
         
@@ -60,6 +113,8 @@ export function handler(event, context, callback) {
       const spectral = new Spectral();
       spectral.setRuleset(rules);      
     
+      connection.end();
+
       spectral.run(apisjson).then(results => {
         console.log("here are the results", results);
         callback(null,results);
