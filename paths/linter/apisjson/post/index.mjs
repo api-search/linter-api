@@ -23,9 +23,9 @@ export function handler(event, context, callback) {
     r.rules = {};
 
     results.forEach(function(row) {
-
+     console.log("name: " + row.name);
      r.rules[row.name] = {};
-     r.rules[row.name] = row.rule;
+     r.rules[row.name] = eval(row.rule);
 
     });
   
