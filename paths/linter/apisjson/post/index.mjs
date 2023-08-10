@@ -25,6 +25,7 @@ export function handler(event, context, callback) {
 
     results.forEach(function(row) {
 
+     rules.rules[row.name] = {};
      rules.rules[row.name] = row.rule;
 
     });
