@@ -60,7 +60,7 @@ jobs:
       - name: /linter/ post lambda deploy zip
         uses: api-search/linter-api@main
         with:
-          args: zip -qq -r m-s-apis-io-linter-po.zip paths/linter/* node_modules
+          args: zip -qq -r m-s-apis-io-linter-po.zip paths/linter node_modules
       - name: linter-api get lambda deploy
         uses: appleboy/lambda-action@master
         with:
