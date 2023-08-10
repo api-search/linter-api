@@ -73,29 +73,7 @@ export function handler(event, context, callback) {
               function: truthy,
             },
           },           
-
-          "apis-json-v14-tags": {
-            description: "Tags for APIs.json",
-            given: "$",
-            message: "Using the tags property for your APIs.json helps add more metadata and make your APIs discoverable.",
-            severity: "error",
-            then: {
-              field: "tags",
-              function: truthy,
-            },
-          },
-          "apis-json-v14-tags-one": {
-            description: "One Tag for APIs.json",
-            given: "$.tags",
-            message: "Having at least one tag for your APIs.json helps ensure that it will be more discoverable.",
-            severity: "error",
-            then: {
-              function: "pattern",
-              functionOptions: {
-                min: 1
-              },
-            },
-          }, 
+          
                               
         },
         
