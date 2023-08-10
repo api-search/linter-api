@@ -142,50 +142,7 @@ export function handler(event, context, callback) {
             },
           },    
                  
-          "apis-json-v14-maintainers": {
-            description: "Maintainers for APIs.json",
-            message: "Using the maintainers property for your APIs.json helps build trust and provenance for your APis.",
-            given: "$",
-            severity: "error",
-            then: {
-              field: "maintainers",
-              function: "truthy"
-            }
-          },
-          "apis-json-v14-maintainers-one": {
-            description: "One Maintainers for APIs.json",
-            message: "Having at least one maintainer for your APIs.json helps build trust and provenance for your APis.",
-            given: "$",
-            severity: "error",
-            then: {
-              field: "maintainers",
-              function: "length",
-              functionOptions: {
-                min: 1
-              }
-            }
-          },
-          "apis-json-v14-maintainers-fn": {
-            description: "Maintainers for APIs.json",
-            message: "Providing an FN for maintainers helps build trust and provide a point of contact for your APIs.json.",
-            given: "$.maintainers.*",
-            severity: "error",
-            then: {
-              field: "FN",
-              function: "truthy"
-            }
-          },
-          "apis-json-v14-maintainers-email": {
-            description: "Maintainers Email",
-            message: "Providing an email address for maintainers helps build trust and provide a point of contact for your APIs.json.",
-            given: "$.maintainers.*",
-            severity: "error",
-            then: {
-              field: "email",
-              function: "truthy"
-            }
-          }, 
-                    
+        
                               
         },
         
