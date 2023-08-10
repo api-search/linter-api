@@ -43,7 +43,35 @@ export function handler(event, context, callback) {
               function: truthy,
             },
           },    
-          
+          "apis-json-v14-description-empty": {
+            description: "Empty Description of APIs.json",
+            given: "$.description",
+            message: "A robust and informative description of your colleciton of APIs makes a lot sense.",
+            severity: "error",
+            then: {
+              function: truthy,
+            },
+          },                  
+          "apis-json-v14-image": {
+            description: "Image of APIs.json",
+            given: "$",
+            message: "It makes your API more presentable to have a logo or image representation.",
+            severity: "error",
+            then: {
+              field: "image",
+              function: truthy,
+            },
+          },    
+          "apis-json-v14-image-empty": {
+            description: "Empty Image of APIs.json",
+            given: "$.image",
+            message: "It makes your API more presentable to have a logo or image representation.",
+            severity: "error",
+            then: {
+              function: truthy,
+            },
+          },   
+
                               
         },
         
