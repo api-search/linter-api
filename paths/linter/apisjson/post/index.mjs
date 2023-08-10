@@ -33,18 +33,8 @@ export function handler(event, context, callback) {
               function: truthy,
             },
           },
-
+   
           "apis-json-v14-description": {
-            description: "Description of APIs.json",
-            given: "$",
-            message: "A robust and informative description of your colleciton of APIs makes a lot sense.",
-            severity: "error",
-            then: {
-              field: "description",
-              function: truthy,
-            },
-          },    
-          "apis-json-v14-description-empty": {
             description: "Empty Description of APIs.json",
             given: "$.description",
             message: "A robust and informative description of your colleciton of APIs makes a lot sense.",
@@ -53,18 +43,8 @@ export function handler(event, context, callback) {
               function: truthy,
             },
           },   
-
+  
           "apis-json-v14-image": {
-            description: "Image of APIs.json",
-            given: "$",
-            message: "It makes your API more presentable to have a logo or image representation.",
-            severity: "error",
-            then: {
-              field: "image",
-              function: truthy,
-            },
-          },    
-          "apis-json-v14-image-empty": {
             description: "Empty Image of APIs.json",
             given: "$.image",
             message: "It makes your API more presentable to have a logo or image representation.",
@@ -73,18 +53,8 @@ export function handler(event, context, callback) {
               function: truthy,
             },
           },           
-
+        
           "apis-json-v14-url": {
-            description: "URL of APIs.json",
-            given: "$",
-            message: "Each APIs.json should have a URL providing a self reference of where it is located.",
-            severity: "error",
-            then: {
-              field: "url",
-              function: truthy,
-            },
-          },    
-          "apis-json-v14-url-empty": {
             description: "Empty URL of APIs.json",
             given: "$.url",
             message:  "Each APIs.json should have a URL providing a self reference of where it is located.",
@@ -94,7 +64,7 @@ export function handler(event, context, callback) {
             },
           },   
 
-          
+
                               
         },
         
