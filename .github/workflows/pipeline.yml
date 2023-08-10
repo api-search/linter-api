@@ -57,27 +57,15 @@ jobs:
           CI: true
 
       # Dynamic below here
-      - name: /linter/apisjson post lambda deploy zip
+      - name: /linter/ post lambda deploy zip
         uses: api-search/linter-api@main
         with:
-          args: zip -qq -r m-s-apis-io-linterapisjson-po.zip paths/linter/apisjson/post/index.mjs node_modules
+          args: zip -qq -r m-s-apis-io-linter-po.zip paths/linter node_modules
       - name: linter-api get lambda deploy
         uses: appleboy/lambda-action@master
         with:
           aws_access_key_id: ${{secrets.AWS_ACCESS_KEY_ID}}
           aws_secret_access_key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
           aws_region: us-east-1
-          function_name: m-s-apis-io-linterapisjson-po
-          zip_file: m-s-apis-io-linterapisjson-po.zip
-      - name: /linter/openapi post lambda deploy zip
-        uses: api-search/linter-api@main
-        with:
-          args: zip -qq -r m-s-apis-io-linteropenapi-po.zip paths/linter/openapi/post/index.mjs node_modules
-      - name: linter-api get lambda deploy
-        uses: appleboy/lambda-action@master
-        with:
-          aws_access_key_id: ${{secrets.AWS_ACCESS_KEY_ID}}
-          aws_secret_access_key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-          aws_region: us-east-1
-          function_name: m-s-apis-io-linteropenapi-po
-          zip_file: m-s-apis-io-linteropenapi-po.zip      
+          function_name: m-s-apis-io-linter-po
+          zip_file: m-s-apis-io-linter-po.zip
