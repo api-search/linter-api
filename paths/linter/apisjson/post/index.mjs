@@ -33,6 +33,7 @@ export function handler(event, context, callback) {
               function: truthy,
             },
           },
+
           "apis-json-v14-description": {
             description: "Description of APIs.json",
             given: "$",
@@ -51,7 +52,8 @@ export function handler(event, context, callback) {
             then: {
               function: truthy,
             },
-          },                  
+          },   
+
           "apis-json-v14-image": {
             description: "Image of APIs.json",
             given: "$",
@@ -70,7 +72,8 @@ export function handler(event, context, callback) {
             then: {
               function: truthy,
             },
-          },                     
+          },           
+
           "apis-json-v14-tags": {
             description: "Tags for APIs.json",
             given: "$",
@@ -83,7 +86,7 @@ export function handler(event, context, callback) {
           },
           "apis-json-v14-tags-one": {
             description: "One Tag for APIs.json",
-            given: "$",
+            given: "$.tags",
             message: "Having at least one tag for your APIs.json helps ensure that it will be more discoverable.",
             severity: "error",
             then: {
