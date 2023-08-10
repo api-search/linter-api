@@ -44,7 +44,7 @@ export function handler(event, context, callback) {
     rules += '},\r\n';
     rules += '}\r\n';  
 
-    rules = typeof JSON.parse(rules), JSON.parse(rules);
+    rules = (typeof JSON.parse(rules), JSON.parse(rules));
     
     const spectral = new Spectral();
     
