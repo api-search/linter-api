@@ -61,8 +61,12 @@ export function handler(event, context, callback) {
     //console.log(rules);
     //spectral.setRuleset(eval(rules));    
     spectral.setRuleset(rules_2); 
+
+    spectral.run(apisjson).then(results => {
+      console.log("here are the results", results);
+      callback(null,results);
+    }); 
     connection.end();
-    callback(null,rules);    
 
   });
 
