@@ -23,14 +23,13 @@ export function handler(event, context, callback) {
       rules: {}
     };
 
-    r.forEach(function(row) {
+    results.forEach(function(row) {
 
-     rules.push(row.rule);
+     rules.rules.push(row.rule);
 
     });
   
     const spectral = new Spectral();
-    
     console.log(rules);
     spectral.setRuleset(rules); 
 
