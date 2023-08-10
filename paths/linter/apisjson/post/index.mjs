@@ -22,8 +22,8 @@ export function handler(event, context, callback) {
     var r = results;
     var ro = {};
 
-    var rules = '{';
-    rules += 'rules: {';
+    var rules = '{\r\n';
+    rules += 'rules: {\r\n';
 
     r.forEach(function(row) {
 
@@ -31,18 +31,18 @@ export function handler(event, context, callback) {
 
       var rule_name = Object.keys(ro);
       
-      rules += '"' + rule_name + '": {';
-      rules += 'given: "' + ro[rule_name].given + '",';
-      rules += 'message: "' + ro[rule_name].description + '",';
-      rules += 'then: {';
-      rules += 'function: truthy,';
-      rules += '},';
-      rules += '},';    
+      rules += '"' + rule_name + '": {\r\n';
+      rules += 'given: "' + ro[rule_name].given + '",\r\n';
+      rules += 'message: "' + ro[rule_name].description + '",\r\n';
+      rules += 'then: {\r\n';
+      rules += 'function: truthy,\r\n';
+      rules += '},\r\n';
+      rules += '},\r\n';    
 
     });
   
-    rules += '},';
-    rules += '}';  
+    rules += '},\r\n';
+    rules += '}\r\n';  
     
     //const spectral = new Spectral();
     //spectral.setRuleset(rules);    
