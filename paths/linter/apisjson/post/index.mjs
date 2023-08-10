@@ -45,9 +45,22 @@ export function handler(event, context, callback) {
     rules += '}\r\n';  
     
     const spectral = new Spectral();
-    console.log(rules)
-    spectral.setRuleset(eval(rules));    
+    
+    var rules_2 = {
+      rules: {
+      "apis-json-v14-description": {
+      given: "$.description",
+      message: "APIs.json Empty Description",
+      then: {
+      function: truthy,
+      },
+      },
+      },
+      };
 
+    //console.log(rules);
+    //spectral.setRuleset(eval(rules));    
+    spectral.setRuleset(rules_2); 
     connection.end();
     callback(null,rules);    
 
