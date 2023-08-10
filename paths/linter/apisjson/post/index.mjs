@@ -103,7 +103,21 @@ export function handler(event, context, callback) {
               field: "tags",
               function: truthy,
             },
-          },          
+          },   
+          "apis-json-v14-tags-one": {
+            description: "One Tag for APIs.json",
+            given: "$.tags",
+            message: "Having at least one tag for your APIs.json helps ensure that it will be more discoverable.",
+            severity: "error",
+            then: {
+              field: "tags",
+              function: "length",
+              functionOptions: {
+                min: 1
+              },
+            },
+          },         
+        
                               
         },
         
