@@ -43,30 +43,19 @@ export function handler(event, context, callback) {
   
     rules += '},\r\n';
     rules += '}\r\n';  
+
+    rules = typeof JSON.parse(rules), JSON.parse(rules);
     
     const spectral = new Spectral();
     
-    var rules_2 = {
-      rules: {
-      "apis-json-v14-description": {
-      given: "$.description",
-      message: "APIs.json Empty Description",
-      then: {
-      function: truthy,
-      },
-      },
-      },
-      };
-
-    //console.log(rules);
+    console.log(rules);
     //spectral.setRuleset(eval(rules));    
-    spectral.setRuleset(rules_2); 
+    spectral.setRuleset(rules); 
 
     spectral.run(apisjson).then(results => {
       console.log("here are the results", results);
       callback(null,results);
     }); 
-    connection.end();
 
   });
 
