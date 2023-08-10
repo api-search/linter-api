@@ -73,6 +73,27 @@ export function handler(event, context, callback) {
               function: truthy,
             },
           },           
+
+          "apis-json-v14-url": {
+            description: "URL of APIs.json",
+            given: "$",
+            message: "Each APIs.json should have a URL providing a self reference of where it is located.",
+            severity: "error",
+            then: {
+              field: "url",
+              function: truthy,
+            },
+          },    
+          "apis-json-v14-url-empty": {
+            description: "Empty URL of APIs.json",
+            given: "$.url",
+            message:  "Each APIs.json should have a URL providing a self reference of where it is located.",
+            severity: "error",
+            then: {
+              function: truthy,
+            },
+          },   
+
           
                               
         },
