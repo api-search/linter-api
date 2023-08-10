@@ -72,7 +72,19 @@ export function handler(event, context, callback) {
             then: {
               function: truthy,
             },
-          },           
+          },    
+          "apis-json-v14-image-url": {
+            description: "Valid APIs.json URL",
+            given: "$.image",
+            message: "You should have a valid URL for your image URLL.",
+            severity: "error",
+            then: {
+              function: "pattern",
+              functionOptions: {
+                notMatch: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"
+              },
+            },
+          },                   
 
           "apis-json-v14-url": {
             description: "URL of APIs.json",
@@ -93,6 +105,18 @@ export function handler(event, context, callback) {
               function: truthy,
             },
           },   
+          "apis-json-v14-url": {
+            description: "Valid APIs.json URL",
+            given: "$.url",
+            message: "Your APIs.json URL should be a valid URL.",
+            severity: "error",
+            then: {
+              function: "pattern",
+              functionOptions: {
+                notMatch: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"
+              },
+            },
+          },            
 
           "apis-json-v14-tags": {
             description: "Tags for APIs.json",
