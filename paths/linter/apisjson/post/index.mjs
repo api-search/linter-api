@@ -19,37 +19,19 @@ export function handler(event, context, callback) {
   var sql = "SELECT rule FROM rules";
   connection.query(sql, function (error, results, fields) { 
 
-    var r = results;
-    var ro = {};
-
-    var rules = '{\r\n';
-    rules += 'rules: {\r\n';
+    const rules = {
+      rules: {}
+    };
 
     r.forEach(function(row) {
 
-      ro = yaml.load(row.rule); 
-
-      var rule_name = Object.keys(ro);
-      
-      rules += '"' + rule_name + '": {\r\n';
-      rules += 'given: "' + ro[rule_name].given + '",\r\n';
-      rules += 'message: "' + ro[rule_name].description + '",\r\n';
-      rules += 'then: {\r\n';
-      rules += 'function: truthy,\r\n';
-      rules += '},\r\n';
-      rules += '},\r\n';    
+     rules.push(row.rule);
 
     });
   
-    rules += '},\r\n';
-    rules += '}\r\n';  
-
-    rules = (typeof JSON.parse(rules), JSON.parse(rules));
-    
     const spectral = new Spectral();
     
     console.log(rules);
-    //spectral.setRuleset(eval(rules));    
     spectral.setRuleset(rules); 
 
     spectral.run(apisjson).then(results => {
