@@ -45,6 +45,7 @@ export function handler(event, context, callback) {
     rules += '}\r\n';  
     
     const spectral = new Spectral();
+    console.log(rules)
     spectral.setRuleset(eval(rules));    
 
     connection.end();
