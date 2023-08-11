@@ -10,72 +10,34 @@ const {
 const spectralRuntime = require('@stoplight/spectral-runtime')
 const { fetch } = spectralRuntime
 
-const fs = require('fs')
-const path = require('path')
+const fs = require('fs');
+const path = require('path');
 
-const { JSONPath } = require('jsonpath-plus')
-const yaml = require('js-yaml')
-
-const { v4: uuidv4 } = require('uuid');
+const { JSONPath } = require('jsonpath-plus');
+const yaml = require('js-yaml');
 
 exports.handler = async function (event) {
 
   var openapi = JSON.stringify(event.openapi);
 
-  console.log("Inside!");
-    
   const spectral = new Spectral();
   
   const rulesetFile = await bundleAndLoadRuleset(path.resolve(__dirname + '/rules.yaml'), { fs, fetch });
 
-  console.log(rulesetFile);
-
   spectral.setRuleset(rulesetFile);
 
-  let ruleNames = Object.keys(spectral.ruleset.rules);
+  let all_rules = Object.keys(spectral.ruleset.rules);
   const doc = yaml.load(openapi, 'utf8');
 
   console.log(doc);
 
-  let ruleMatches = []
+  for (let rule of all_rules) {
 
-  for (let rule of ruleNames) {
+    console.log(rule);
 
-    let givenPaths = spectral.ruleset.rules[rule].definition.given;
-
-    //Given field can be a string or an array
-    if (typeof givenPaths == 'string') {
-      givenPaths = [givenPaths]
-    }
-
-    for (let path of givenPaths) {
-
-      //First we need to check whether this is a JSONPath or an Alias
-      switch(path.charAt(0)) {
-        case "$":
-          let results = JSONPath({ path: path, json: doc })
-          ruleMatches.push({
-            path: path,
-            matches: results
-          })
-          break;
-        case "#":
-          ruleMatches.push({
-            path: path,
-            matches: ["JSON Path targeting is not supported with aliases."]
-          })
-          break;
-        default:
-          console.log("This is neither");
-          break;
-      } 
-
-    }
   }
 
   const myDocument = new Document(openapi, Parsers.Yaml);
-
-  console.log("Finishing!");
 
   return spectral.run(myDocument).then(results => {
     return results;
