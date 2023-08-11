@@ -41,14 +41,14 @@ exports.handler = function (event, context, callback) {
       console.log("Inside!");
 
       var sql = "SELECT name,rule FROM rules";
-      
+
       connection.query(sql, function (error, results, fields) { 
         
           if(results && results.length > 0){   
             
             var ruleset = 'rules:\r\n';
 
-            for(let row of rows) {
+            for(let row of results) {
               ruleset += row.rule;
             }
 
