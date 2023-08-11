@@ -19,8 +19,8 @@ const { v4: uuidv4 } = require('uuid');
 
 exports.handler = function (event, context, callback) {
 
-  var ruleset = event.ruleset;
-  var openapi = event.openapi;
+  var ruleset = JSON.stringify(event.ruleset);
+  var openapi = JSON.stringify(event.openapi);
 
     if (!ruleset || ruleset == '' || !openapi || openapi == '') {
 
@@ -31,17 +31,17 @@ exports.handler = function (event, context, callback) {
 
       console.log("Inside!");
 
-      console.log(openapi);
-
       console.log(ruleset);
+
+      console.log(openapi);
 
       const spectral = new Spectral();
 
       let uniqueFileId = uuidv4();
 
-      fs.writeFileSync(`/tmp/.${uniqueFileId}.json`, JSON.stringify(ruleset));
+      fs.writeFileSync(`/tmp/.${uniqueFileId}.json`, ruleset);
 
-      const rulesetFile = bundleAndLoadRuleset(JSON.parse(path.resolve(`/tmp/.${uniqueFileId}.json`)), { fs, fetch });
+      const rulesetFile = bundleAndLoadRuleset(path.resolve(`/tmp/.${uniqueFileId}.json`), { fs, fetch });
 
       console.log(rulesetFile);
 
