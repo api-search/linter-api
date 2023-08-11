@@ -180,17 +180,19 @@ export function handler(event, context, callback) {
             },
           },                    
                 
-          "apis-json-v14-apis-properties-url": {
-            description: "API Properties URL",
-            message: "All the URLs for your properties should be a valid URL.",
+          "apis-json-v14-apis-properties-documentation": {
+            description: "API Properties Documentation",
+            message: "Providing a URL to your API documentation helps onboard users to what they will need to learn about your APIs.",
             given: "$.apis.*.properties.*",
-            then: {
-                field: "url",
+            then: [
+              {
+                field: "type",
                 function: "pattern",
                 functionOptions: {
-                  match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$",
+                  notMatch: "\\b(documentation)\\b",
+                },
               },
-            },
+            ]
           },          
 
         },
