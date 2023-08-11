@@ -19,15 +19,18 @@ const yaml = require('js-yaml')
 const { v4: uuidv4 } = require('uuid')
 
 const retrieveRuleset = async filePath => {
+
   try {
+
     console.log("Retrieving Ruleset!");
-    return await bundleAndLoadRuleset(path.resolve(filePath), { fs, fetch })
-  } catch (ex) {
-    let errTraceId = uuidv4();
-    console.log(errTraceId, ex)
-    throw new Error(
-      'Invalid Spectral rule supplied.\nPlease check your syntax and try again.\n\nError Details:\n\nMessage: ' + ex.toString() + '\nTrace ID: ' + errTraceId + '\n\nIf you need further investigation, please create a Github issue with the Trace ID.\n\nBe sure to include the Spectral rule you are trying to validate in your issue description.'
-    )
+
+    return await bundleAndLoadRuleset(path.resolve(filePath), { fs, fetch });
+
+  } 
+  catch (ex) {
+
+    callback(null,ex);
+
   }
 }
 
@@ -37,8 +40,11 @@ exports.handler = async function (event, context) {
   var openapi = event.openapi;
 
     if (!ruleset || ruleset == '' || !openapi || openapi == '') {
+
       throw new Error("Ruleset and API spec are required for validation.");
-    } else {
+
+    } 
+    else {
 
       console.log("Inside!");
 
@@ -48,6 +54,8 @@ exports.handler = async function (event, context) {
 
       fs.writeFileSync(`/tmp/.${uniqueFileId}.yaml`, ruleset)
       const rulesetFile = await retrieveRuleset(`/tmp/.${uniqueFileId}.yaml`)
+
+      console.log(rulesetFile);
 
       spectral.setRuleset(rulesetFile)
       fs.unlinkSync(`/tmp/.${uniqueFileId}.yaml`)
@@ -61,6 +69,7 @@ exports.handler = async function (event, context) {
       let ruleMatches = []
 
       for (let rule of ruleNames) {
+
         let givenPaths = spectral.ruleset.rules[rule].definition.given;
 
         //Given field can be a string or an array
@@ -69,6 +78,7 @@ exports.handler = async function (event, context) {
         }
 
         for (let path of givenPaths) {
+
           //First we need to check whether this is a JSONPath or an Alias
           switch(path.charAt(0)) {
             case "$":
@@ -88,11 +98,13 @@ exports.handler = async function (event, context) {
               console.log("This is neither");
               break;
           } 
+
         }
       }
 
-      const myDocument = new Document(openapi, Parsers.Yaml)
+      const myDocument = new Document(openapi, Parsers.Yaml);
       console.log("Finishing!");
+
       return spectral.run(myDocument).then(results => {
         callback(null,results);
       })
