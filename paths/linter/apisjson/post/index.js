@@ -34,7 +34,7 @@ const retrieveRuleset = async filePath => {
   }
 }
 
-exports.handler = async function (event, context) {
+exports.handler = function (event, context, callback) {
 
   var ruleset = event.ruleset;
   var openapi = event.openapi;
