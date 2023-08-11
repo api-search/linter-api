@@ -21,13 +21,10 @@ const mysql  = require('mysql');
 
 const retrieveRuleset = async filePath => {
   try {
-    return await bundleAndLoadRuleset(path.resolve(filePath), { fs, fetch })
-  } catch (ex) {
-    let errTraceId = uuidv4();
-    console.log(errTraceId, ex)
-    throw new Error(
-      'Invalid Spectral rule supplied.\nPlease check your syntax and try again.\n\nError Details:\n\nMessage: ' + ex.toString() + '\nTrace ID: ' + errTraceId + '\n\nIf you need further investigation, please create a Github issue with the Trace ID.\n\nBe sure to include the Spectral rule you are trying to validate in your issue description.'
-    )
+    return await bundleAndLoadRuleset(path.resolve(filePath), { fs, fetch });
+  } 
+  catch (ex) {
+    return ex;
   }
 }
 
@@ -70,9 +67,8 @@ exports.handler = async function (event) {
 
             let uniqueFileId = uuidv4();
 
-            fs.writeFileSync(`/tmp/.${uniqueFileId}.yaml`, ruleset);
-
-            const rulesetFile = retrieveRuleset(`/tmp/.${uniqueFileId}.yaml`)
+            fs.writeFileSync(`/tmp/.${uniqueFileId}.yaml`, ruleset)
+            const rulesetFile = await retrieveRuleset(`/tmp/.${uniqueFileId}.yaml`)            
 
             console.log(rulesetFile);
 
