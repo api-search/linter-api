@@ -15,7 +15,6 @@ const path = require('path')
 
 const { JSONPath } = require('jsonpath-plus')
 const yaml = require('js-yaml')
-
 const { v4: uuidv4 } = require('uuid');
 
 exports.handler = function (event, context, callback) {
@@ -40,14 +39,14 @@ exports.handler = function (event, context, callback) {
 
       let uniqueFileId = uuidv4();
 
-      fs.writeFileSync(`/tmp/.${uniqueFileId}.yaml`, JSON.stringify(ruleset));
+      fs.writeFileSync(`/tmp/.${uniqueFileId}.json`, ruleset);
 
-      const rulesetFile = bundleAndLoadRuleset(path.resolve(`/tmp/.${uniqueFileId}.yaml`), { fs, fetch });
+      const rulesetFile = bundleAndLoadRuleset(path.resolve(`/tmp/.${uniqueFileId}.json`), { fs, fetch });
 
       console.log(rulesetFile);
 
       spectral.setRuleset(rulesetFile);
-      fs.unlinkSync(`/tmp/.${uniqueFileId}.yaml`);
+      fs.unlinkSync(`/tmp/.${uniqueFileId}.json`);
 
       let ruleNames = Object.keys(spectral.ruleset.rules);
       const doc = yaml.load(openapi, 'utf8');
