@@ -26,7 +26,7 @@ exports.handler = async function (event) {
     
   const spectral = new Spectral();
   
-  const rulesetFile = await bundleAndLoadRuleset(path.resolve(`.rules.yaml`), { fs, fetch });
+  const rulesetFile = await bundleAndLoadRuleset(path.resolve(__dirname + '/rules.yaml'), { fs, fetch });
 
   console.log(rulesetFile);
 
@@ -74,7 +74,7 @@ exports.handler = async function (event) {
   }
 
   const myDocument = new Document(openapi, Parsers.Yaml);
-  
+
   console.log("Finishing!");
 
   return spectral.run(myDocument).then(results => {
