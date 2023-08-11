@@ -19,15 +19,6 @@ const { v4: uuidv4 } = require('uuid');
 
 const mysql  = require('mysql');
 
-const retrieveRuleset = async filePath => {
-  try {
-    return await bundleAndLoadRuleset(path.resolve(filePath), { fs, fetch });
-  } 
-  catch (ex) {
-    return ex;
-  }
-}
-
 exports.handler = async function (event) {
 
   var connection = mysql.createConnection({
@@ -67,8 +58,8 @@ exports.handler = async function (event) {
 
             let uniqueFileId = uuidv4();
 
-            fs.writeFileSync(`/tmp/.${uniqueFileId}.yaml`, ruleset)
-            const rulesetFile = await retrieveRuleset(`/tmp/.${uniqueFileId}.yaml`)            
+            fs.writeFileSync(`/tmp/.${uniqueFileId}.yaml`, ruleset);
+            const rulesetFile = new Promise(bundleAndLoadRuleset(path.resolve(filePath), { fs, fetch }));
 
             console.log(rulesetFile);
 
