@@ -72,39 +72,7 @@ export function handler(event, context, callback) {
             then: {
               function: truthy,
             },
-          },    
-          "apis-json-v14-image-url": {
-            description: "Valid APIs.json URL",
-            given: "$.image",
-            message: "You should have a valid URL for your image URLL.",
-            severity: "error",
-            then: {
-              function: "pattern",
-              functionOptions: {
-                notMatch: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"
-              },
-            },
-          },                   
-
-          "apis-json-v14-url": {
-            description: "URL of APIs.json",
-            given: "$",
-            message: "Each APIs.json should have a URL providing a self reference of where it is located.",
-            severity: "error",
-            then: {
-              field: "url",
-              function: truthy,
-            },
-          },    
-          "apis-json-v14-url-empty": {
-            description: "Empty URL of APIs.json",
-            given: "$.url",
-            message:  "Each APIs.json should have a URL providing a self reference of where it is located.",
-            severity: "error",
-            then: {
-              function: truthy,
-            },
-          },   
+          },                     
            
         
                               
