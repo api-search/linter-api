@@ -93,7 +93,7 @@ export function handler(event, context, callback) {
               field: "maintainers",
               function: "length",
               functionOptions: {
-                min: 1
+                min: "1"
               }
             }
           },
