@@ -49,7 +49,7 @@ exports.handler = function (event, context, callback) {
             var ruleset = 'rules:\r\n';
 
             for(let row of results) {
-              ruleset += row.rule;
+              ruleset += row.rule + '\r\n';
             }
 
             console.log(ruleset);
@@ -58,15 +58,15 @@ exports.handler = function (event, context, callback) {
 
             let uniqueFileId = uuidv4();
 
-            fs.writeFileSync(`/tmp/.${uniqueFileId}.yml`, ruleset);
+            fs.writeFileSync(`/tmp/.${uniqueFileId}.yaml`, ruleset);
 
-            const rulesetFile = bundleAndLoadRuleset(path.resolve(`/tmp/.${uniqueFileId}.yml`), { fs, fetch });
+            const rulesetFile = bundleAndLoadRuleset(path.resolve(`/tmp/.${uniqueFileId}.yaml`), { fs, fetch });
 
             console.log(rulesetFile);
 
             spectral.setRuleset(rulesetFile);
 
-            fs.unlinkSync(`/tmp/.${uniqueFileId}.yml`);
+            fs.unlinkSync(`/tmp/.${uniqueFileId}.yaml`);
 
             let ruleNames = Object.keys(spectral.ruleset.rules);
             const doc = yaml.load(openapi, 'utf8');
