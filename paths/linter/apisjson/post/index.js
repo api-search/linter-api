@@ -18,7 +18,6 @@ const yaml = require('js-yaml')
 const { v4: uuidv4 } = require('uuid');
 
 const mysql  = require('mysql');
-const https  = require('https');
 
 exports.handler = function (event, context, callback) {
 
@@ -41,7 +40,8 @@ exports.handler = function (event, context, callback) {
 
       console.log("Inside!");
 
-      var sql = "SELECT name,rule FROM rules';
+      var sql = "SELECT name,rule FROM rules";
+      
       connection.query(sql, function (error, results, fields) { 
         
           if(results && results.length > 0){   
