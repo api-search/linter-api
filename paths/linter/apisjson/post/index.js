@@ -48,11 +48,16 @@ exports.handler = async function (event, context) {
 
       console.log("Inside!");
 
+      console.log(ruleset);
+
+      console.log(openapi);
+
       const spectral = new Spectral();
 
       let uniqueFileId = uuidv4()
 
       fs.writeFileSync(`/tmp/.${uniqueFileId}.yaml`, ruleset)
+
       const rulesetFile = await retrieveRuleset(`/tmp/.${uniqueFileId}.yaml`)
 
       console.log(rulesetFile);
