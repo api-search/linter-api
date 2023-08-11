@@ -20,6 +20,7 @@ const { v4: uuidv4 } = require('uuid')
 
 const retrieveRuleset = async filePath => {
   try {
+    console.log("Retrieving Ruleset!");
     return await bundleAndLoadRuleset(path.resolve(filePath), { fs, fetch })
   } catch (ex) {
     let errTraceId = uuidv4();
@@ -35,10 +36,11 @@ exports.handler = async function (event, context) {
   var ruleset = event.ruleset;
   var openapi = event.openapi;
 
-
     if (!ruleset || ruleset == '' || !openapi || openapi == '') {
       throw new Error("Ruleset and API spec are required for validation.");
     } else {
+
+      console.log("Inside!");
 
       const spectral = new Spectral();
 
@@ -53,6 +55,8 @@ exports.handler = async function (event, context) {
       //Now the spectral object is populated, we can extract the JSONPath.
       let ruleNames = Object.keys(spectral.ruleset.rules)
       const doc = yaml.load(openapi, 'utf8')
+
+      console.log(doc);
 
       let ruleMatches = []
 
@@ -88,7 +92,7 @@ exports.handler = async function (event, context) {
       }
 
       const myDocument = new Document(openapi, Parsers.Yaml)
-
+      console.log("Finishing!");
       return spectral.run(myDocument).then(results => {
         callback(null,results);
       })
