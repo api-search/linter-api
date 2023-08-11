@@ -176,7 +176,6 @@ export function handler(event, context, callback) {
                 notMatch: "\\b(documentation)\\b",
               },
             },
-            formats: [oas3],
             severity: "warn",
           },          
                 
