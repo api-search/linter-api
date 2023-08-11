@@ -116,20 +116,7 @@ export function handler(event, context, callback) {
                 notMatch: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"
               },
             },
-          },            
-
-          "apis-json-v14-tags": {
-            description: "Tags for APIs.json",
-            given: "$",
-            message: "Using the tags property for your APIs.json helps add more metadata and make your APIs discoverable.",
-            severity: "error",
-            then: {
-              field: "tags",
-              function: truthy,
-            },
-          },   
-  
-               
+          },             
         
                               
         },
