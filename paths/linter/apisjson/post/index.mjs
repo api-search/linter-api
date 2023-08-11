@@ -105,18 +105,7 @@ export function handler(event, context, callback) {
               function: truthy,
             },
           },   
-          "apis-json-v14-url": {
-            description: "Valid APIs.json URL",
-            given: "$.url",
-            message: "Your APIs.json URL should be a valid URL.",
-            severity: "error",
-            then: {
-              function: "pattern",
-              functionOptions: {
-                notMatch: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"
-              },
-            },
-          },             
+           
         
                               
         },
