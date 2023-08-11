@@ -19,7 +19,7 @@ const { v4: uuidv4 } = require('uuid');
 
 const mysql  = require('mysql');
 
-exports.handler = async function (event) {
+exports.handler = function (event, context, callback) {
 
   var connection = mysql.createConnection({
     host     : process.env.host,
@@ -59,7 +59,8 @@ exports.handler = async function (event) {
             let uniqueFileId = uuidv4();
 
             fs.writeFileSync(`/tmp/.${uniqueFileId}.yaml`, ruleset);
-            const rulesetFile = bundleAndLoadRuleset(path.resolve(filePath), { fs, fetch });
+
+            const rulesetFile = bundleAndLoadRuleset(path.resolve(`/tmp/.${uniqueFileId}.yaml`), { fs, fetch });
 
             console.log(rulesetFile);
 
@@ -112,7 +113,7 @@ exports.handler = async function (event) {
             console.log("Finishing!");
 
             return spectral.run(myDocument).then(results => {
-              return results;
+              callback(null,results);
             })   
             
           }
