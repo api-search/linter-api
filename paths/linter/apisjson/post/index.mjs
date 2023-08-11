@@ -173,7 +173,7 @@ export function handler(event, context, callback) {
             then: {
               function: "pattern",
               functionOptions: {
-                notMatch: "\\b(documentation)\\b",
+                notMatch: "/v[1-9]",
               },
             },
             severity: "warn",
