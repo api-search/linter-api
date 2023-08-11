@@ -31,9 +31,9 @@ exports.handler = function (event, context, callback) {
 
       console.log("Inside!");
 
-      console.log(ruleset);
-
       console.log(openapi);
+
+      console.log(ruleset);
 
       const spectral = new Spectral();
 
@@ -41,7 +41,7 @@ exports.handler = function (event, context, callback) {
 
       fs.writeFileSync(`/tmp/.${uniqueFileId}.json`, JSON.stringify(ruleset));
 
-      const rulesetFile = bundleAndLoadRuleset(path.resolve(`/tmp/.${uniqueFileId}.json`), { fs, fetch });
+      const rulesetFile = bundleAndLoadRuleset(JSON.parse(path.resolve(`/tmp/.${uniqueFileId}.json`)), { fs, fetch });
 
       console.log(rulesetFile);
 
