@@ -164,9 +164,35 @@ export function handler(event, context, callback) {
               field: "tags",
               function: truthy,
             },
+          },   
+          
+          "apis-json-v14-apis-tags": {
+            description: "Tags for API",
+            message: "Using the tags property for your APIs helps add more metadata and make your APIs discoverable.",
+            given: "$.apis.*",
+            severity: "error",
+            then: {
+              field: "url",
+              function: "pattern",
+              functionOptions: { 
+                match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$",
+              },
+            },
+          },                    
+                
+          "apis-json-v14-apis-properties-url": {
+            description: "API Properties URL",
+            message: "All the URLs for your properties should be a valid URL.",
+            given: "$.apis.*.properties.*",
+            then: {
+                field: "url",
+                function: "pattern",
+                functionOptions: {
+                  match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$",
+              },
+            },
           },          
-        
-                              
+
         },
         
       };
