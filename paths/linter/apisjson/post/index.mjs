@@ -173,13 +173,13 @@ export function handler(event, context, callback) {
             given: "$.apis.*.properties.*",
             then: {
                 field: "type",
-                function: "pattern",
+                function: pattern,
                 functionOptions: {
-                  notMatch: "\\b(documentation)\\b"
+                  notMatch: "\\b(documentation)\\b",
                 },
               },
           },    
-
+                
 
         },
         
