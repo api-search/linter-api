@@ -39,7 +39,7 @@ exports.handler = function (event, context, callback) {
 
       let uniqueFileId = uuidv4();
 
-      fs.writeFileSync(`/tmp/.${uniqueFileId}.json`, ruleset);
+      fs.writeFileSync(`/tmp/.${uniqueFileId}.json`, JSON.stringify(ruleset));
 
       const rulesetFile = bundleAndLoadRuleset(path.resolve(`/tmp/.${uniqueFileId}.json`), { fs, fetch });
 
