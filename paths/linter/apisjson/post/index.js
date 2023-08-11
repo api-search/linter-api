@@ -16,23 +16,7 @@ const path = require('path')
 const { JSONPath } = require('jsonpath-plus')
 const yaml = require('js-yaml')
 
-const { v4: uuidv4 } = require('uuid')
-
-const retrieveRuleset = async filePath => {
-
-  try {
-
-    console.log("Retrieving Ruleset!");
-
-    return await bundleAndLoadRuleset(path.resolve(filePath), { fs, fetch });
-
-  } 
-  catch (ex) {
-
-    callback(null,ex);
-
-  }
-}
+const { v4: uuidv4 } = require('uuid');
 
 exports.handler = function (event, context, callback) {
 
@@ -58,7 +42,7 @@ exports.handler = function (event, context, callback) {
 
       fs.writeFileSync(`/tmp/.${uniqueFileId}.yaml`, JSON.stringify(ruleset));
 
-      const rulesetFile = await retrieveRuleset(`/tmp/.${uniqueFileId}.yaml`);
+      const rulesetFile = bundleAndLoadRuleset(path.resolve(`/tmp/.${uniqueFileId}.yaml`), { fs, fetch });
 
       console.log(rulesetFile);
 
