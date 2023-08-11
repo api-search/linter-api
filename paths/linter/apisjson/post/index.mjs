@@ -105,6 +105,66 @@ export function handler(event, context, callback) {
             },
           },          
            
+          "apis-json-v14-apis-name": {
+            description: "Name of APIs",
+            message: "Providing a name of your index of APIs helps ensure it will be discoverable.",
+            given: "$.apis.*",
+            severity: "error",
+            then: {
+              field: "name",
+              function: truthy,
+            },
+          }, 
+          "apis-json-v14-apis-description": {
+            description: "Description of APIs",
+            message: "A robust and informative description of your colleciton of APis makes a lot sense.",
+            given: "$.apis.*",
+            severity: "error",
+            then: {
+              field: "description",
+              function: truthy,
+            },
+          }, 
+          "apis-json-v14-apis-image": {
+            description: "Image of APIs",
+            message: "It makes your API more presentable to have a logo or image representation.",
+            given: "$.apis.*",
+            severity: "error",
+            then: {
+              field: "image",
+              function: truthy,
+            },
+          }, 
+          "apis-json-v14-apis-humanURL": {
+            description: "Human URL for APIs",
+            message: "Your API should have the human URL included to help provide a single link to your API.",
+            given: "$.apis.*",
+            severity: "error",
+            then: {
+              field: "humanURL",
+              function: truthy,
+            },
+          }, 
+          "apis-json-v14-apis-baseURL": {
+            description: "Base URL for APIs",
+            message: "Your API should have the base URL included to help provide a unique identifier for your API.",
+            given: "$.apis.*",
+            severity: "error",
+            then: {
+              field: "baseURL",
+              function: truthy,
+            },
+          }, 
+          "apis-json-v14-apis-tags": {
+            description: "Tags for API",
+            message: "Using the tags property for your APIs helps add more metadata and make your APIs discoverable.",
+            given: "$.apis.*",
+            severity: "error",
+            then: {
+              field: "tags",
+              function: truthy,
+            },
+          },          
         
                               
         },
