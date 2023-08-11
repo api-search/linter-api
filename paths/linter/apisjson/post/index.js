@@ -54,20 +54,19 @@ exports.handler = async function (event, context) {
 
       const spectral = new Spectral();
 
-      let uniqueFileId = uuidv4()
+      let uniqueFileId = uuidv4();
 
-      fs.writeFileSync(`/tmp/.${uniqueFileId}.yaml`, ruleset)
+      fs.writeFileSync(`/tmp/.${uniqueFileId}.yaml`, JSON.stringify(ruleset));
 
-      const rulesetFile = await retrieveRuleset(`/tmp/.${uniqueFileId}.yaml`)
+      const rulesetFile = await retrieveRuleset(`/tmp/.${uniqueFileId}.yaml`);
 
       console.log(rulesetFile);
 
-      spectral.setRuleset(rulesetFile)
-      fs.unlinkSync(`/tmp/.${uniqueFileId}.yaml`)
+      spectral.setRuleset(rulesetFile);
+      fs.unlinkSync(`/tmp/.${uniqueFileId}.yaml`);
 
-      //Now the spectral object is populated, we can extract the JSONPath.
-      let ruleNames = Object.keys(spectral.ruleset.rules)
-      const doc = yaml.load(openapi, 'utf8')
+      let ruleNames = Object.keys(spectral.ruleset.rules);
+      const doc = yaml.load(openapi, 'utf8');
 
       console.log(doc);
 
