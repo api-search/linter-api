@@ -59,7 +59,7 @@ exports.handler = async function (event) {
             let uniqueFileId = uuidv4();
 
             fs.writeFileSync(`/tmp/.${uniqueFileId}.yaml`, ruleset);
-            const rulesetFile = new Promise(bundleAndLoadRuleset(path.resolve(filePath), { fs, fetch }));
+            const rulesetFile = bundleAndLoadRuleset(path.resolve(filePath), { fs, fetch });
 
             console.log(rulesetFile);
 
