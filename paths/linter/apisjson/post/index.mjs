@@ -165,21 +165,7 @@ export function handler(event, context, callback) {
               function: truthy,
             },
           },                    
-                
-          "apis-json-v14-apis-properties-documentation": {
-            description: "API Properties Documentation",
-            message: "Providing a URL to your API documentation helps onboard users to what they will need to learn about your APIs.",
-            given: "$.apis.*.properties.*",
-            then: [
-              {
-                field: "type",
-                function: "pattern",
-                functionOptions: {
-                  notMatch: "\\b(documentation)\\b",
-                },
-              },
-            ]
-          },          
+                        
 
         },
         
