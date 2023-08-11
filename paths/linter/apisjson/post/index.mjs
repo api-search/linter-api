@@ -91,7 +91,7 @@ export function handler(event, context, callback) {
             severity: "error",
             then: {
               field: "maintainers",
-              function: length,
+              function: "length",
               functionOptions: {
                 min: 1
               }
