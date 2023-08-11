@@ -82,7 +82,7 @@ export function handler(event, context, callback) {
             then: {
               field: "maintainers",
               function: truthy,
-            }
+            },
           },
           "apis-json-v14-maintainers-one": {
             description: "One Maintainers for APIs.json",
@@ -95,8 +95,8 @@ export function handler(event, context, callback) {
               functionOptions: {
                 min: 1,
                 max: 5,
-              }
-            }
+              },
+            },
           },
           "apis-json-v14-maintainers-fn": {
             description: "Maintainers for APIs.json",
@@ -106,7 +106,7 @@ export function handler(event, context, callback) {
             then: {
               field: "FN",
               function: truthy,
-            }
+            },
           },
           "apis-json-v14-maintainers-email": {
             description: "Maintainers Email",
@@ -116,7 +116,7 @@ export function handler(event, context, callback) {
             then: {
               field: "email",
               function: truthy,
-            }
+            },
           },          
            
         
