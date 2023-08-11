@@ -166,18 +166,19 @@ export function handler(event, context, callback) {
             },
           },   
                  
-                
           "apis-json-v14-apis-properties-documentation": {
             description: "API Properties Documentation",
             message: "Providing a URL to your API documentation helps onboard users to what they will need to learn about your APIs.",
             given: "$.apis.*.properties.*.type",
             then: {
-                function: "pattern",
-                functionOptions: {
-                  notMatch: "\\b(documentation)\\b",
-                },
+              function: pattern,
+              functionOptions: {
+                notMatch: "\\b(documentation)\\b",
               },
-          },    
+            },
+            formats: [oas3],
+            severity: "warn",
+          },          
                 
 
         },
