@@ -17,7 +17,17 @@ const { JSONPath } = require('jsonpath-plus')
 const yaml = require('js-yaml')
 const { v4: uuidv4 } = require('uuid');
 
+const mysql  = require('mysql');
+const https  = require('https');
+
 exports.handler = function (event, context, callback) {
+
+  var connection = mysql.createConnection({
+    host     : process.env.host,
+    user     : process.env.user,
+    password : process.env.password,
+    database : process.env.database
+    });  
 
   var ruleset = JSON.stringify(event.ruleset);
   var openapi = JSON.stringify(event.openapi);
@@ -31,70 +41,84 @@ exports.handler = function (event, context, callback) {
 
       console.log("Inside!");
 
-      console.log(ruleset);
+      var sql = "SELECT name,rule FROM rules';
+      connection.query(sql, function (error, results, fields) { 
+        
+          if(results && results.length > 0){   
+            
+            var ruleset = 'rules:\r\n';
 
-      console.log(openapi);
+            for(let row of rows) {
+              ruleset += row.rule;
+            }
 
-      const spectral = new Spectral();
+            console.log(ruleset);
 
-      let uniqueFileId = uuidv4();
+            const spectral = new Spectral();
 
-      fs.writeFileSync(`/tmp/.${uniqueFileId}.json`, ruleset);
+            let uniqueFileId = uuidv4();
 
-      const rulesetFile = bundleAndLoadRuleset(path.resolve(`/tmp/.${uniqueFileId}.json`), { fs, fetch });
+            fs.writeFileSync(`/tmp/.${uniqueFileId}.yml`, ruleset);
 
-      console.log(rulesetFile);
+            const rulesetFile = bundleAndLoadRuleset(path.resolve(`/tmp/.${uniqueFileId}.yml`), { fs, fetch });
 
-      spectral.setRuleset(rulesetFile);
-      fs.unlinkSync(`/tmp/.${uniqueFileId}.json`);
+            console.log(rulesetFile);
 
-      let ruleNames = Object.keys(spectral.ruleset.rules);
-      const doc = yaml.load(openapi, 'utf8');
+            spectral.setRuleset(rulesetFile);
 
-      console.log(doc);
+            fs.unlinkSync(`/tmp/.${uniqueFileId}.yml`);
 
-      let ruleMatches = []
+            let ruleNames = Object.keys(spectral.ruleset.rules);
+            const doc = yaml.load(openapi, 'utf8');
 
-      for (let rule of ruleNames) {
+            console.log(doc);
 
-        let givenPaths = spectral.ruleset.rules[rule].definition.given;
+            let ruleMatches = []
 
-        //Given field can be a string or an array
-        if (typeof givenPaths == 'string') {
-          givenPaths = [givenPaths]
-        }
+            for (let rule of ruleNames) {
 
-        for (let path of givenPaths) {
+              let givenPaths = spectral.ruleset.rules[rule].definition.given;
 
-          //First we need to check whether this is a JSONPath or an Alias
-          switch(path.charAt(0)) {
-            case "$":
-              let results = JSONPath({ path: path, json: doc })
-              ruleMatches.push({
-                path: path,
-                matches: results
-              })
-              break;
-            case "#":
-              ruleMatches.push({
-                path: path,
-                matches: ["JSON Path targeting is not supported with aliases."]
-              })
-              break;
-            default:
-              console.log("This is neither");
-              break;
-          } 
+              //Given field can be a string or an array
+              if (typeof givenPaths == 'string') {
+                givenPaths = [givenPaths]
+              }
 
-        }
-      }
+              for (let path of givenPaths) {
 
-      const myDocument = new Document(openapi, Parsers.Yaml);
-      console.log("Finishing!");
+                //First we need to check whether this is a JSONPath or an Alias
+                switch(path.charAt(0)) {
+                  case "$":
+                    let results = JSONPath({ path: path, json: doc })
+                    ruleMatches.push({
+                      path: path,
+                      matches: results
+                    })
+                    break;
+                  case "#":
+                    ruleMatches.push({
+                      path: path,
+                      matches: ["JSON Path targeting is not supported with aliases."]
+                    })
+                    break;
+                  default:
+                    console.log("This is neither");
+                    break;
+                } 
 
-      return spectral.run(myDocument).then(results => {
-        callback(null,results);
-      })
+              }
+            }
+
+            const myDocument = new Document(openapi, Parsers.Yaml);
+            console.log("Finishing!");
+
+            return spectral.run(myDocument).then(results => {
+              callback(null,results);
+            })   
+            
+          }
+      });
+
 
     }
 
