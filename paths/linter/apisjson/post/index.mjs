@@ -72,7 +72,20 @@ export function handler(event, context, callback) {
             then: {
               function: truthy,
             },
-          },                     
+          },    
+          "apis-json-v14-image-url": {
+            description: "Valid APIs.json URL",
+            given: "$",
+            message: "You should have a valid URL for your image URLL.",
+            severity: "error",
+            then: {
+              field: "image",
+              function: "pattern",
+              functionOptions: {
+                notMatch: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"
+              },
+            },
+          },                   
 
            
         
