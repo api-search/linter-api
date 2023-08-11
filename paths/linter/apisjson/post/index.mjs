@@ -81,7 +81,7 @@ export function handler(event, context, callback) {
             severity: "error",
             then: {
               field: "maintainers",
-              function: "truthy"
+              function: truthy,
             }
           },
           "apis-json-v14-maintainers-fn": {
@@ -91,7 +91,7 @@ export function handler(event, context, callback) {
             severity: "error",
             then: {
               field: "FN",
-              function: "truthy"
+              function: truthy,
             }
           },
           "apis-json-v14-maintainers-email": {
@@ -101,7 +101,7 @@ export function handler(event, context, callback) {
             severity: "error",
             then: {
               field: "email",
-              function: "truthy"
+              function: truthy,
             }
           },          
            
