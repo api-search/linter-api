@@ -175,7 +175,7 @@ export function handler(event, context, callback) {
                 field: "type",
                 function: "pattern",
                 functionOptions: {
-                  notMatch: "\\b(documentation)\\b",
+                  "notMatch": "\\b(documentation)\\b",
                 },
               },
             ]
