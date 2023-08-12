@@ -3,7 +3,7 @@ rules:
 
 # Root Level
 
-  # APIs.json - Name - BAD
+  # APIs.json - Name - Good
   apis-json-v14-name:
     description: Name of APIs.json
     message: Providing a name of your index of APIs helps ensure it will be discoverable.
@@ -11,9 +11,9 @@ rules:
     severity: error
     then:
       field: name
-      function: truthy
+      function: falsy
 
-  # APIs.json - Description - BAD
+  # APIs.json - Description - Good
   apis-json-v14-description:
     description: Description of APIs.json
     message: A robust and informative description of your colleciton of APis makes a lot sense.
@@ -21,9 +21,9 @@ rules:
     severity: error
     then:
       field: description
-      function: truthy
+      function: falsy
   
-  # APIs.json - Image - BAD
+  # APIs.json - Image - Good
   apis-json-v14-image:
     description: Image of APIs.json
     message: It makes your API more presentable to have a logo or image representation.
@@ -31,9 +31,9 @@ rules:
     severity: error
     then:
       field: description
-      function: truthy    
+      function: falsy    
 
-  # APIs.json - URL - BAD
+  # APIs.json - URL - Good
   apis-json-v14-url:
     description: URL for APIs.json
     message: Providing a reference to where your APIs.json is located is a valuable references.
@@ -41,9 +41,9 @@ rules:
     severity: error
     then:
       field: url
-      function: truthy   
+      function: falsy   
 
-  # APIs.json - Tags - BAD
+  # APIs.json - Tags - Good
   apis-json-v14-tags:
     description: Tags for APIs.json
     message: Using the tags property for your APIs.json helps add more metadata and make your APIs discoverable.
@@ -51,9 +51,9 @@ rules:
     severity: error
     then:
       field: tags
-      function: truthy    
+      function: falsy    
 
-  # APIs.json - Tags - BAD
+  # APIs.json - Tags - Good
   apis-json-v14-tags-one:
     description: One Tag for APIs.json
     message: Having at least one tag for your APIs.json helps ensure that it will be more discoverable.
@@ -65,7 +65,7 @@ rules:
       functionOptions:
         min: 1            
 
-  # APIs.json - Maintainers - BAD
+  # APIs.json - Maintainers - Good
   apis-json-v14-maintainers:
     description: Maintainers for APIs.json
     message: Using the maintainers property for your APIs.json helps build trust and provenance for your APis.
@@ -73,9 +73,9 @@ rules:
     severity: error
     then:
       field: maintainers
-      function: truthy    
+      function: falsy    
 
-  # APIs.json - Maintainers - BAD
+  # APIs.json - Maintainers - Good
   apis-json-v14-maintainers-one:
     description: One Maintainers for APIs.json
     message: Having at least one maintainer for your APIs.json helps build trust and provenance for your APis.
@@ -87,7 +87,7 @@ rules:
       functionOptions:
         min: 1  
 
-  # APIs.json - Maintainers - BAD
+  # APIs.json - Maintainers - Good
   apis-json-v14-maintainers-fn:
     description: Maintainers for APIs.json
     message: Providing an FN for maintainers helps build trust and provide a point of contact for your APIs.json.
@@ -95,9 +95,9 @@ rules:
     severity: error
     then:
       field: FN
-      function: truthy       
+      function: falsy       
 
-  # APIs.json - Maintainers - BAD
+  # APIs.json - Maintainers - Good
   apis-json-v14-maintainers-email:
     description: Maintainers Email
     message: Providing an email address for maintainers helps build trust and provide a point of contact for your APIs.json.
@@ -105,12 +105,12 @@ rules:
     severity: error
     then:
       field: email
-      function: truthy          
+      function: falsy          
 
 
 # APIs
 
-  # APIs - Name - BAD
+  # APIs - Name - Good
   apis-json-v14-apis-name:
     description: Name of APIs
     message: Providing a name of your index of APIs helps ensure it will be discoverable.
@@ -118,9 +118,9 @@ rules:
     severity: error
     then:
       field: name
-      function: truthy
+      function: falsy
 
-  # APIs - Description - BAD
+  # APIs - Description - Good
   apis-json-v14-apis-description:
     description: Description of APIs
     message: A robust and informative description of your colleciton of APis makes a lot sense.
@@ -128,9 +128,9 @@ rules:
     severity: error
     then:
       field: description
-      function: truthy
+      function: falsy
   
-  # APIs - Image - BAD
+  # APIs - Image - Good
   apis-json-v14-apis-image:
     description: Image of APIs
     message: It makes your API more presentable to have a logo or image representation.
@@ -138,9 +138,9 @@ rules:
     severity: error
     then:
       field: image
-      function: truthy    
+      function: falsy    
 
-  # APIs - humanURL - BAD
+  # APIs - humanURL - Good
   apis-json-v14-apis-humanURL:
     description: Human URL for APIs
     message: Your API should have the human URL included to help provide a single link to your API.
@@ -148,9 +148,9 @@ rules:
     severity: error
     then:
       field: humanURL
-      function: truthy  
+      function: falsy  
 
-  # APIs - baseURL - BAD
+  # APIs - baseURL - Good
   apis-json-v14-apis-baseURL:
     description: Base URL for APIs
     message: Your API should have the base URL included to help provide a unique identifier for your API.
@@ -158,9 +158,9 @@ rules:
     severity: error
     then:
       field: baseURL
-      function: truthy     
+      function: falsy     
 
-  # APIs - Tags - BAD
+  # APIs - Tags - Good
   apis-json-v14-apis-tags:
     description: Tags for API
     message: Using the tags property for your APIs helps add more metadata and make your APIs discoverable.
@@ -168,7 +168,7 @@ rules:
     severity: error
     then:
       field: tags
-      function: truthy    
+      function: falsy    
 
   # APIs - Tags - BAD
   apis-json-v14-apis-tags-one:
