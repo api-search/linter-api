@@ -1,8 +1,7 @@
 openapi: 3.0.1
 info:
-  title: APIs.io API
-  description: This is the public version of the APis.io API search engine, providing
-    search, submission, and engine capabilities.
+  title: APIs.io Linting API
+  description: This is the linting API for APIs.io.
   version: V1
 servers:
 - url: https://6lmdrlqfjj.execute-api.us-east-1.amazonaws.com/staging
@@ -41,7 +40,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UpdateProperties'
+                $ref: '#/components/schemas/Linter'
       x-amazon-apigateway-integration:
         httpMethod: POST
         uri: arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:007596076917:function:m-s-apis-io-linteropenapi-po/invocations
@@ -103,7 +102,7 @@ components:
           description: The name of the service described
           minLength: 5
 
-    Linting:
+    Linter:
       type: object
       description: 'An JSON API object with metadata, data, and links.'
       

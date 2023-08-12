@@ -1,39 +1,46 @@
-import spectralCore from "@stoplight/spectral-core";
-const { Spectral, Document } = spectralCore;
-import Parsers from "@stoplight/spectral-parsers";
-import { truthy } from "@stoplight/spectral-functions"; 
+const spectralCore = require('@stoplight/spectral-core')
+const { Spectral, Document } = spectralCore
 
-export function handler(event, context, callback) {
+const Parsers = require('@stoplight/spectral-parsers')
+const { truthy, pattern, xor } = require('@stoplight/spectral-functions')
 
-  const myDocument = new Document(
-    `---
-  responses:
-    '200':
-      description: ''`,
-    Parsers.Yaml,
-    "/my-file",
-  );
+const {
+  bundleAndLoadRuleset
+} = require('@stoplight/spectral-ruleset-bundler/with-loader')
+const spectralRuntime = require('@stoplight/spectral-runtime')
+const { fetch } = spectralRuntime
+
+const fs = require('fs');
+const path = require('path');
+
+const { JSONPath } = require('jsonpath-plus');
+const yaml = require('js-yaml');
+
+exports.handler = async function (event) {
+
+  var openapi = JSON.stringify(event.body);
 
   const spectral = new Spectral();
-  spectral.setRuleset({
+  
+  const rulesetFile = await bundleAndLoadRuleset(path.resolve(__dirname + '/rules.yaml'), { fs, fetch });
 
-    rules: { // Begin Rules
+  spectral.setRuleset(rulesetFile);
 
-      "no-empty-description": {
-        given: "$..description",
-        message: "Description must not be empty",
-        then: {
-          function: truthy,
-        },
-      },
+  let all_rules = Object.keys(spectral.ruleset.rules);
+  const doc = yaml.load(openapi, 'utf8');
 
-    }, // End Rules
+  console.log(doc);
 
-  });
+  for (let rule of all_rules) {
 
-  spectral.run(myDocument).then(results => {
-    console.log("here are the results", results);
-    callback(null,results);
-  });
+    console.log(rule);
+
+  }
+
+  const myDocument = new Document(openapi, Parsers.Yaml);
+
+  return spectral.run(myDocument).then(results => {
+    return results;
+  })   
 
 };

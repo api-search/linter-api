@@ -18,7 +18,7 @@ const yaml = require('js-yaml');
 
 exports.handler = async function (event) {
 
-  var openapi = JSON.stringify(event.openapi);
+  var apisjson = JSON.stringify(event.body);
 
   const spectral = new Spectral();
   
@@ -27,7 +27,7 @@ exports.handler = async function (event) {
   spectral.setRuleset(rulesetFile);
 
   let all_rules = Object.keys(spectral.ruleset.rules);
-  const doc = yaml.load(openapi, 'utf8');
+  const doc = yaml.load(apisjson, 'utf8');
 
   console.log(doc);
 
@@ -37,7 +37,7 @@ exports.handler = async function (event) {
 
   }
 
-  const myDocument = new Document(openapi, Parsers.Yaml);
+  const myDocument = new Document(apisjson, Parsers.Yaml);
 
   return spectral.run(myDocument).then(results => {
     return results;
