@@ -15,7 +15,7 @@ const path = require('path');
 
 exports.handler = async function (event) {
 
-  var apisjson = JSON.stringify(event.body);
+  var apisjson = event.body;
 
   const spectral = new Spectral();
   
