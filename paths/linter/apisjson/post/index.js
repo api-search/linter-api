@@ -15,7 +15,7 @@ const path = require('path');
 
 exports.handler = async function (event) {
 
-  var apisjson = event.body;
+  var apisjson = event;
 
   console.log(event);
 
@@ -25,12 +25,10 @@ exports.handler = async function (event) {
 
   spectral.setRuleset(rulesetFile);
 
-  return event;
-
   //const myDocument = new Document(apisjson, Parsers.Yaml);
 
-  //return spectral.run(apisjson).then(results => {
-//    return results;
-//  })   
+  return spectral.run(apisjson).then(results => {
+    return results;
+  })   
 
 };
