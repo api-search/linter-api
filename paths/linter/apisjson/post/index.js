@@ -16,6 +16,7 @@ const path = require('path');
 exports.handler = async function (event) {
 
   var apisjson = event;
+  console.log(apisjson);
 
   const spectral = new Spectral();
   
@@ -24,7 +25,7 @@ exports.handler = async function (event) {
   spectral.setRuleset(rulesetFile);
 
   return spectral.run(apisjson).then(results => {
-    return event;
+    return results;
   })    
 
 };
