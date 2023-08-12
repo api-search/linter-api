@@ -13,9 +13,6 @@ const { fetch } = spectralRuntime
 const fs = require('fs');
 const path = require('path');
 
-const { JSONPath } = require('jsonpath-plus');
-const yaml = require('js-yaml');
-
 exports.handler = async function (event) {
 
   var apisjson = JSON.stringify(event.body);
@@ -25,14 +22,6 @@ exports.handler = async function (event) {
   const rulesetFile = await bundleAndLoadRuleset(path.resolve(__dirname + '/rules.yaml'), { fs, fetch });
 
   spectral.setRuleset(rulesetFile);
-
-  let all_rules = spectral.ruleset.rules;
-
-  for (let rule of all_rules) {
-
-    console.log(rule);
-
-  }
 
   //const myDocument = new Document(apisjson, Parsers.Yaml);
 
