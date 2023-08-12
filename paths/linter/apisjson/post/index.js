@@ -25,7 +25,7 @@ exports.handler = async function (event) {
 
   spectral.setRuleset(rulesetFile);
 
-  return apisjson;
+  return event;
 
   //const myDocument = new Document(apisjson, Parsers.Yaml);
 
