@@ -18,7 +18,8 @@ const yaml = require('js-yaml');
 
 exports.handler = async function (event) {
 
-  var apisjson = JSON.stringify(event.body);
+  var apisjson = event.body;
+  
   console.log(apisjson);
 
   const spectral = new Spectral();
