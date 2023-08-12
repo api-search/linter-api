@@ -17,18 +17,14 @@ exports.handler = async function (event) {
 
   var apisjson = event;
 
-  console.log(event);
-
   const spectral = new Spectral();
   
   const rulesetFile = await bundleAndLoadRuleset(path.resolve(__dirname + '/rules.yaml'), { fs, fetch });
 
   spectral.setRuleset(rulesetFile);
 
-  //const myDocument = new Document(apisjson, Parsers.Yaml);
-
   return spectral.run(apisjson).then(results => {
     return results;
-  })   
+  })    
 
 };
