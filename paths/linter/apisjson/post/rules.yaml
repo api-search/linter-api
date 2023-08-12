@@ -279,7 +279,19 @@ rules:
       - field: type
         function: pattern
         functionOptions:
-          notMatch: "\\b(api-getting-started)\\b"  
+          match: "\\b(api-getting-started)\\b"  
+
+  # API Properties - Management - Geting Started - GOOD
+  apis-json-v14-apis-properties-management-signup:
+    description: API Properties Management Signup
+    message: Providing a signup form to begin using your service provides a quick link for new API consumers to get started.
+    given: '$.apis.*.properties.*'
+    then:
+
+      - field: type
+        function: pattern
+        functionOptions:
+          match: "\\b(X-signup)\\b"            
 
   # API Properties - Management - Plans - GOOD
   apis-json-v14-apis-properties-management-plans:
@@ -419,7 +431,7 @@ rules:
       - field: type
         function: pattern
         functionOptions:
-          notMatch: "\\b(blog)\\b"  
+          match: "\\b(blog)\\b"  
 
   # API Properties - Communications - Video - GOOD
   apis-json-v14-apis-properties-communications-video:
