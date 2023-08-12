@@ -34,9 +34,9 @@ exports.handler = async function (event) {
 
   }
 
-  const myDocument = new Document(apisjson, Parsers.Yaml);
+  //const myDocument = new Document(apisjson, Parsers.Yaml);
 
-  return spectral.run(myDocument).then(results => {
+  return spectral.run(apisjson).then(results => {
     return results;
   })   
 
