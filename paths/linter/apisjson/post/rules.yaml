@@ -1,7 +1,9 @@
 ---
 rules:
 
-# Root Level
+  # ------------
+  # META
+  # ------------
 
   # APIs.json - Name - Good
   apis-json-v14-name:
@@ -43,6 +45,9 @@ rules:
       field: url
       function: falsy   
 
+  # ------------
+  # TAGS
+  # ------------
   # APIs.json - Tags - Good
   apis-json-v14-tags:
     description: Tags for APIs.json
@@ -63,8 +68,11 @@ rules:
       field: tags
       function: length
       functionOptions:
-        min: 1            
+        min: 1        
 
+  # ------------
+  # MAINTAINERS
+  # ------------
   # APIs.json - Maintainers - Good
   apis-json-v14-maintainers:
     description: Maintainers for APIs.json
@@ -74,18 +82,6 @@ rules:
     then:
       field: maintainers
       function: falsy    
-
-  # APIs.json - Maintainers - Good
-  apis-json-v14-maintainers-one:
-    description: One Maintainers for APIs.json
-    message: Having at least one maintainer for your APIs.json helps build trust and provenance for your APis.
-    given: "$"
-    severity: error
-    then:
-      field: maintainers
-      function: length
-      functionOptions:
-        min: 1  
 
   # APIs.json - Maintainers - Good
   apis-json-v14-maintainers-fn:
@@ -108,7 +104,9 @@ rules:
       function: falsy          
 
 
-# APIs
+  # ------------
+  # APIS
+  # ------------
 
   # APIs - Name - Good
   apis-json-v14-apis-name:
@@ -183,25 +181,9 @@ rules:
         min: 1          
 
 
-  # Properties
-
-  # Global
-
-  # API Properties - URL - BAD
-  apis-json-v14-apis-properties-url:
-    description: API Properties URL
-    message: All the URLs for your properties should be a valid URL.
-    given: '$.apis.*.properties.*'
-    then:
-
-      - field: url
-        function: pattern
-        functionOptions:
-          match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"     
-
-  # ---------
-  # Specific
-  # ---------
+  # ------------
+  # PROPERTIES
+  # ------------
 
   # Documentation
 
@@ -216,6 +198,11 @@ rules:
         function: pattern
         functionOptions:
           notMatch: "\\b(documentation)\\b"   
+
+      - field: url
+        function: pattern
+        functionOptions:
+          match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"               
       
   # API Properties - Documentation - Postman Collection - GOOD      
   apis-json-v14-apis-properties-documentation-postman-collection:
@@ -229,6 +216,11 @@ rules:
         functionOptions:
           notMatch: "\\b(postman-collection)\\b" 
 
+      - field: url
+        function: pattern
+        functionOptions:
+          match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"               
+
   # API Properties - Documentation - OpenAPI - GOOD      
   apis-json-v14-apis-properties-documentation-openapi:
     description: API Properties Documentation OpenAPI
@@ -240,6 +232,11 @@ rules:
         function: pattern
         functionOptions:
           notMatch: "\\b(openapi)\\b" 
+
+      - field: url
+        function: pattern
+        functionOptions:
+          match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"               
 
   # Workspaces
 
@@ -255,6 +252,11 @@ rules:
         functionOptions:
           notMatch: "\\b(postman-public-workspace)\\b"  
 
+      - field: url
+        function: pattern
+        functionOptions:
+          match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"               
+
   # API Properties - Workspaces - GitHub - Public - GOOD
   apis-json-v14-apis-properties-workspaces-github-public:
     description: API Properties Workspaces GitHub Public
@@ -265,7 +267,12 @@ rules:
       - field: type
         function: pattern
         functionOptions:
-          notMatch: "\\b(github-repository)\\b"     
+          notMatch: "\\b(github-repository)\\b"    
+
+      - field: url
+        function: pattern
+        functionOptions:
+          match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"                
 
   # Management
 
@@ -281,6 +288,11 @@ rules:
         functionOptions:
           notMatch: "\\b(api-getting-started)\\b"  
 
+      - field: url
+        function: pattern
+        functionOptions:
+          match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"               
+
   # API Properties - Management - Sign Up - GOOD
   apis-json-v14-apis-properties-management-signup:
     description: API Properties Management Signup
@@ -291,7 +303,12 @@ rules:
       - field: type
         function: pattern
         functionOptions:
-          notMatch: "\\b(X-signup)\\b"            
+          notMatch: "\\b(X-signup)\\b"   
+
+      - field: url
+        function: pattern
+        functionOptions:
+          match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"                        
 
   # API Properties - Management - Plans - GOOD
   apis-json-v14-apis-properties-management-plans:
@@ -305,6 +322,11 @@ rules:
         functionOptions:
           notMatch: "\\b(api-plans)\\b"  
 
+      - field: url
+        function: pattern
+        functionOptions:
+          match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"               
+
   # API Properties - Management - Authentication - GOOD
   apis-json-v14-apis-properties-management-authentication:
     description: API Properties Management Authentication
@@ -315,7 +337,12 @@ rules:
       - field: type
         function: pattern
         functionOptions:
-          notMatch: "\\b(api-authentication)\\b"            
+          notMatch: "\\b(api-authentication)\\b"  
+
+      - field: url
+        function: pattern
+        functionOptions:
+          match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"                         
    
   # Change
 
@@ -331,6 +358,11 @@ rules:
         functionOptions:
           notMatch: "\\b(api-road-map)\\b"  
 
+      - field: url
+        function: pattern
+        functionOptions:
+          match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"               
+
   # API Properties - Change - Change Log - GOOD
   apis-json-v14-apis-properties-change-change-log:
     description: API Properties Change Change Log
@@ -342,6 +374,11 @@ rules:
         function: pattern
         functionOptions:
           notMatch: "\\b(api-change-log)\\b"  
+
+      - field: url
+        function: pattern
+        functionOptions:
+          match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"               
 
   # Environments
 
@@ -357,6 +394,11 @@ rules:
         functionOptions:
           notMatch: "\\b(api-environment-sandbox)\\b"  
 
+      - field: url
+        function: pattern
+        functionOptions:
+          match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"               
+
   # API Properties - Environments - Sandbox - GOOD
   apis-json-v14-apis-properties-environments-production:
     description: API Properties Environments Production
@@ -368,6 +410,11 @@ rules:
         function: pattern
         functionOptions:
           notMatch: "\\b(api-environment-production)\\b"  
+
+      - field: url
+        function: pattern
+        functionOptions:
+          match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"               
 
   # SDKs
 
@@ -383,6 +430,11 @@ rules:
         functionOptions:
           notMatch: "\\b(api-sdk-python)\\b"  
 
+      - field: url
+        function: pattern
+        functionOptions:
+          match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"               
+
   # API Properties - SDK - Go - GOOD
   apis-json-v14-apis-properties-sdk-go:
     description: API Properties SDK Go
@@ -393,7 +445,12 @@ rules:
       - field: type
         function: pattern
         functionOptions:
-          notMatch: "\\b(api-sdk-go)\\b"  
+          notMatch: "\\b(api-sdk-go)\\b" 
+
+      - field: url
+        function: pattern
+        functionOptions:
+          match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"                
 
   # API Properties - SDK - Node - GOOD
   apis-json-v14-apis-properties-sdk-node:
@@ -405,7 +462,12 @@ rules:
       - field: type
         function: pattern
         functionOptions:
-          notMatch: "\\b(api-sdk-node)\\b"      
+          notMatch: "\\b(api-sdk-node)\\b"  
+
+      - field: url
+        function: pattern
+        functionOptions:
+          match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"                   
 
   # API Properties - SDK - Java - GOOD
   apis-json-v14-apis-properties-sdk-java:
@@ -417,7 +479,12 @@ rules:
       - field: type
         function: pattern
         functionOptions:
-          notMatch: "\\b(api-sdk-java)\\b"      
+          notMatch: "\\b(api-sdk-java)\\b" 
+
+      - field: url
+        function: pattern
+        functionOptions:
+          match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"                    
 
   # Communication
 
@@ -433,6 +500,11 @@ rules:
         functionOptions:
           notMatch: "\\b(blog)\\b"  
 
+      - field: url
+        function: pattern
+        functionOptions:
+          match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"               
+
   # API Properties - Communications - Video - GOOD
   apis-json-v14-apis-properties-communications-video:
     description: API Properties Communications Video
@@ -443,7 +515,12 @@ rules:
       - field: type
         function: pattern
         functionOptions:
-          notMatch: "\\b(videos)\\b"  
+          notMatch: "\\b(videos)\\b" 
+
+      - field: url
+        function: pattern
+        functionOptions:
+          match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"                
 
   # Communication
 
@@ -459,6 +536,11 @@ rules:
         functionOptions:
           notMatch: "\\b(support)\\b"  
 
+      - field: url
+        function: pattern
+        functionOptions:
+          match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"               
+
   # API Properties - Support - Issues - GOOD
   apis-json-v14-apis-properties-support-issues:
     description: API Properties Support Issues
@@ -471,6 +553,11 @@ rules:
         functionOptions:
           notMatch: "\\b(issues)\\b"  
 
+      - field: url
+        function: pattern
+        functionOptions:
+          match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"               
+
   # API Properties - Support - Email - GOOD
   apis-json-v14-apis-properties-support-email:
     description: API Properties Email email
@@ -482,6 +569,11 @@ rules:
         function: pattern
         functionOptions:
           notMatch: "\\b(email)\\b"  
+
+      - field: url
+        function: pattern
+        functionOptions:
+          match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"               
 
   # Communication
 
@@ -497,6 +589,11 @@ rules:
         functionOptions:
           notMatch: "\\b(api-terms-of-service)\\b"  
 
+      - field: url
+        function: pattern
+        functionOptions:
+          match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"               
+
   # API Properties - Legal - License - GOOD
   apis-json-v14-apis-properties-legal-license:
     description: API Properties Legal License
@@ -509,6 +606,11 @@ rules:
         functionOptions:
           notMatch: "\\b(api-license)\\b"  
 
+      - field: url
+        function: pattern
+        functionOptions:
+          match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"               
+
   # API Properties - Legal - Privacy Policy - GOOD
   apis-json-v14-apis-properties-legal-privacy-policy:
     description: API Properties Legal Privacy Policy
@@ -519,4 +621,9 @@ rules:
       - field: type
         function: pattern
         functionOptions:
-          notMatch: "\\b(api-privacy-policy)\\b"          
+          notMatch: "\\b(api-privacy-policy)\\b"   
+
+      - field: url
+        function: pattern
+        functionOptions:
+          match: "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"                      
