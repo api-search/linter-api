@@ -24,7 +24,7 @@ exports.handler = async function (event) {
   spectral.setRuleset(rulesetFile);
 
   return spectral.run(apisjson).then(results => {
-    return results;
+    return event;
   })    
 
 };
