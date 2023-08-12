@@ -13,12 +13,9 @@ const { fetch } = spectralRuntime
 const fs = require('fs');
 const path = require('path');
 
-const { JSONPath } = require('jsonpath-plus');
-const yaml = require('js-yaml');
-
 exports.handler = async function (event) {
 
-  var openapi = JSON.stringify(event.body);
+  var openapi = event;
 
   const spectral = new Spectral();
   
@@ -26,20 +23,7 @@ exports.handler = async function (event) {
 
   spectral.setRuleset(rulesetFile);
 
-  let all_rules = Object.keys(spectral.ruleset.rules);
-  const doc = yaml.load(openapi, 'utf8');
-
-  console.log(doc);
-
-  for (let rule of all_rules) {
-
-    console.log(rule);
-
-  }
-
-  const myDocument = new Document(openapi, Parsers.Yaml);
-
-  return spectral.run(myDocument).then(results => {
+  return spectral.run(openapi).then(results => {
     return results;
   })   
 
