@@ -492,7 +492,11 @@ rules:
   apis-json-v14-apis-properties-communications-blog:
     description: API Properties Communications Blog
     message: Offering a blog that is dedicated to your API helps increase engagement with consumers and help ensure they are more aware of what is happening.
-    given: '$.apis.*.properties.*'
+    given: 
+    
+      - '$.apis.*.properties.*'
+      - '$.properties.*'
+
     then:
 
       - field: type
