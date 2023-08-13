@@ -495,7 +495,7 @@ rules:
     given: 
     
       - '$.apis.*.properties.*'
-      - '$.properties.*'
+      - '$.x-properties.*'
 
     then:
 
