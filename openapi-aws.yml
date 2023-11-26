@@ -4,7 +4,7 @@ info:
   description: This is the linting API for APIs.io.
   version: V1
 servers:
-- url: https://6lmdrlqfjj.execute-api.us-east-1.amazonaws.com/staging
+- url: https://linter-api.apis.io
 paths:
 
   /linter/apisjson:
